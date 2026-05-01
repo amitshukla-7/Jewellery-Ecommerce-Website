@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product | Savitri Jewellers</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="product.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet"/>
+  <script type="module" src="product.js"></script>
+
+ 
+</head>
+<body class="product-page" >
+
+  <!-- Navbar -->
+<header class="navbar">
+  <div class="navbar-left">
+    <!-- Hamburger menu (mobile only) -->
+    <div class="hamburger" id="hamburgerMenu">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Logo -->
+    <div class="logo">
+      <img src="logo.png" alt="Savitri Jewelers" />
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div class="search-icon-input">
+    <i class="fas fa-search"></i>
+    <input type="text" id="searchInput" placeholder="Search jewellery..." />
+  </div>
+
+  <!-- Right icons (desktop only) -->
+  <div class="icons desktop-icons">
+    <i class="fas fa-map-marker-alt" title="Location"></i>
+    <a href="cart.html" title="Go to Cart">
+      <i class="fas fa-shopping-cart" title="Cart"></i>
+    </a>
+    <a href="profile.html" class="profile-link" title="Profile">
+      <i class="fas fa-user"></i>
+    </a>
+  </div>
+
+  <!-- Sign in button -->
+  <a href="login.html" class="floating-signin-btn" id="signInBtn" style="display: none;">
+    <i class="fas fa-user"></i> Sign In
+  </a>
+</header>
+
+<!-- Categories (desktop only) -->
+<nav class="categories" id="categoryNav">
+  <a href="index.html"><button><i class="fas fa-star"></i> All Products</button></a>
+  <a href="gold-silver.html"><button class="gold"><i class="fas fa-coins"></i> Gold & Silver</button></a>
+  <a href="diamond.html"><button><i class="fas fa-gem"></i> Diamond</button></a>
+  <a href="rings.html"><button><i class="fas fa-ring"></i> Rings</button></a>
+  <a href="earrings.html"><button><i class="fas fa-ear-deaf"></i> Earrings</button></a>
+  <a href="wedding.html"><button><i class="fas fa-heart"></i> Wedding</button></a>
+  <a href="offer.html"><button><i class="fas fa-tags"></i> Offers</button></a>
+</nav>
+
+<!-- Side Menu (mobile only) -->
+<div class="side-menu" id="sideMenu">
+  <div class="side-menu-header">
+    <span class="close-btn" id="closeMenu">&times;</span>
+    <img src="logo.png" alt="Savitri Jewelers" class="side-logo" />
+  </div>
+  <div class="side-menu-content">
+    <h3>Categories</h3>
+    <a href="index.html"><i class="fas fa-star"></i> All Products</a>
+    <a href="gold-silver.html"><i class="fas fa-coins"></i> Gold & Silver</a>
+    <a href="diamond.html"><i class="fas fa-gem"></i> Diamond</a>
+    <a href="rings.html"><i class="fas fa-ring"></i> Rings</a>
+    <a href="earrings.html"><i class="fas fa-ear-deaf"></i> Earrings</a>
+    <a href="wedding.html"><i class="fas fa-heart"></i> Wedding</a>
+    <a href="offer.html"><i class="fas fa-tags"></i> Offers</a>
+
+    <h3>Account</h3>
+    <a href="#"><i class="fas fa-map-marker-alt"></i> Location</a>
+    <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+    <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+    <a href="login.html" id="signInBtn"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+    <a href="#" id="logoutBtn" class="logout-btn" style="display: none;">
+    <i class="fas fa-sign-out-alt"></i> Logout</a>
+  </div>
+</div>
+<div class="overlay" id="overlay"></div>
+
+
+
+  <!-- ✅ Product Detail -->
+  <main>
+    <section class="product-detail-container" id="productDetail">
+      <p>Loading product...</p>
+    </section>
+  </main>
+
+  <!-- Chat Support -->
+<div class="chat-bubble" id="customChatBtn">
+  <i class="fas fa-comment-dots"></i>
+  <div class="chat-text">How Can I help U?</div>
+</div>
+
+<!-- Tawk.to Script -->
+<script type="text/javascript">
+var Tawk_API = Tawk_API || {};
+var Tawk_LoadStart = new Date();
+
+Tawk_API.onLoad = function(){
+    Tawk_API.hideWidget();
+};
+
+(function(){
+    var s1=document.createElement("script"),
+        s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/68d2c35bbded921922e24c6b/1j5rkm7mc';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+})();
+
+document.addEventListener("DOMContentLoaded", function(){
+    document.getElementById("customChatBtn").addEventListener("click", function(){
+        if (typeof Tawk_API !== "undefined" && Tawk_API.maximize) {
+            Tawk_API.maximize();
+        }
+    });
+});
+</script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAcIX5XXvSQnCro67KK9_jF0AOGg2mDxVc",
+    authDomain: "savitri-jewellers-76184.firebaseapp.com",
+    projectId: "savitri-jewellers-76184",
+    storageBucket: "savitri-jewellers-76184.appspot.com",
+    messagingSenderId: "914460735352",
+    appId: "1:914460735352:web:d60778c5486d29db983a8d",
+    databaseURL: "https://savitri-jewellers-76184-default-rtdb.firebaseio.com"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Grab buttons after DOM is ready
+    const signInBtns = document.querySelectorAll("#signInBtn");
+    const logoutBtns = document.querySelectorAll("#logoutBtn, #logout-link");
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        signInBtns.forEach(btn => btn.style.setProperty("display", "none", "important"));
+        logoutBtns.forEach(btn => btn.style.setProperty("display", "flex", "important"));
+      } else {
+        signInBtns.forEach(btn => btn.style.setProperty("display", "flex", "important"));
+        logoutBtns.forEach(btn => btn.style.setProperty("display", "none", "important"));
+      }
+    });
+
+    // Add logout functionality
+    logoutBtns.forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        signOut(auth).then(() => {
+          window.location.href = "index.html";
+        });
+      });
+    });
+  });
+</script>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>

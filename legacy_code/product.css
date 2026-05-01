@@ -1,0 +1,281 @@
+
+
+.product-detail-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 20px;
+  gap: 40px;
+}
+
+.product-image-container {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image-container img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  object-fit: contain;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.product-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.product-info h1 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  font-family: 'Playfair Display', serif;
+}
+
+.product-info .price {
+  font-size: 1.8rem;
+  color: #c62828;
+  margin-bottom: 20px;
+}
+
+.product-info .description {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.product-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.product-buttons button {
+  padding: 12px 25px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.product-buttons .buy-now {
+  background-color: #e53935;
+  color: white;
+}
+
+.product-buttons .buy-now:hover {
+  background-color: #b71c1c;
+}
+
+.product-buttons .add-to-cart {
+  background-color: #fdd835;
+  color: #212121;
+}
+
+.product-buttons .add-to-cart:hover {
+  background-color: #fbc02d;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  height: 120px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo{
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  margin-top:10px ;
+  margin-left:20px;
+  margin-bottom:19px
+
+}
+.logo img {
+  height: 90px;
+  font-size: 200%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+ 
+  margin-top: 0px;
+  padding: 0;
+}
+
+.footer {
+  background-color: #3b1d1d;
+  color: #f9f8f4;
+  padding: 10px 20px; /* Reduced padding */
+  font-family: 'Playfair Display', serif;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 10px; /* Less gap above the line */
+  font-size: 13px;
+  color: #c7b69c;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 5px; /* Smaller gap above text */
+}
+
+
+/* Cart popup animation */
+.popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #4BB543;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  z-index: 9999;
+  opacity: 0;
+  transition: all 0.4s ease;
+  display: none;
+}
+
+.popup.show {
+  opacity: 1;
+}
+@media (max-width: 768px) {
+
+  /* Keep navbar a fixed bar that never grows */
+  .navbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;              /* fixed height */
+    padding: 0 10px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    overflow: hidden;          /* prevents growth */
+    gap: 8px;
+    box-sizing: border-box;
+  }
+
+  /* Row pieces: [hamburger + logo] [search] [sign in] */
+  .navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;            /* don't stretch */
+    min-width: 0;
+  }
+
+  /* Make sure hamburger actually shows on mobile */
+  .hamburger {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    color: #333;
+    flex: 0 0 auto;
+  }
+  .hamburger i {
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  /* Kill big desktop margins on the logo in mobile */
+  .logo {
+    margin: 0 !important;
+    padding-left: 4px;         /* tiny breathing room from hamburger */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+  .logo img {
+    height: 50px;              /* bigger logo on mobile */
+    width: auto;
+    display: block;
+    margin-right:50%;
+  }
+
+  /* Search sits between logo and sign-in, flexes but never forces bar taller */
+  .search-icon-input {
+    flex: 1 1 auto;            /* expand to fill middle space */
+    min-width: 90px;           /* don't collapse invisibly */
+    max-width: 100%;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 10px;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 18px;
+    overflow: hidden;         /* keep inside height */
+    
+  }
+  .search-icon-input i {
+    font-size: 14px;
+    color: #555;
+  }
+  .search-icon-input input {
+    flex: 1 1 auto;
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    min-width: 0;              /* allow shrinking */
+  }
+
+  /* ================= PRODUCT PAGE SIGN-IN BUTTON ================= */
+.product-page .floating-signin-btn {
+  position: static !important;   /* override absolute */
+  top: auto !important;
+  right: auto !important;
+  z-index: auto !important;
+
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 13px;
+  line-height: 1;
+  white-space: nowrap;
+
+  color: #fff;
+  background-color: #c6a84d;
+  border-radius: 6px;
+  text-decoration: none;
+
+  box-shadow: none;              /* remove index shadow */
+}
+
+/* Icon size */
+.product-page .floating-signin-btn i {
+  font-size: 14px;
+}
+
+/* Hover (product only) */
+.product-page .floating-signin-btn:hover {
+  background-color: #b79a3f;
+}
+
+  /* Hide desktop-only bits on mobile */
+  .desktop-icons,
+  .categories {
+    display: none !important;
+  }
+}

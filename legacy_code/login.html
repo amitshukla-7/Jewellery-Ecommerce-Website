@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Savitri Jewellers</title>
+  <link rel="stylesheet" href="login.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="login-wrapper">
+    <div class="login-container">
+      <h2>Welcome Back</h2>
+      <p class="subtitle">Login to your account</p>
+      <form id="loginForm">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter password" required />
+
+        <button type="submit">Login</button>
+
+        <button id="googleSignInBtn" class="google-btn" type="button">
+          <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" />
+          <span>Sign in with Google</span>
+        </button>
+
+        <p class="extra-text">
+          Don't have an account? <a href="signup.html">Sign up</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { 
+  getAuth, 
+  signInWithEmailAndPassword, 
+  GoogleAuthProvider, 
+  signInWithPopup, 
+  fetchSignInMethodsForEmail,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import { getDatabase, ref, get, set, child } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAcIX5XXvSQnCro67KK9_jF0AOGg2mDxVc",
+  authDomain: "savitri-jewellers-76184.firebaseapp.com",
+  projectId: "savitri-jewellers-76184",
+  storageBucket: "savitri-jewellers-76184.appspot.com",
+  messagingSenderId: "914460735352",
+  appId: "1:914460735352:web:d60778c5486d29db983a8d",
+  databaseURL: "https://savitri-jewellers-76184-default-rtdb.firebaseio.com"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+const ADMIN_EMAIL = "24ir10am4@mitsgwl.ac.in";
+
+// ---------------- Auto-redirect if already logged in ----------------
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    try {
+      const snapshot = await get(child(ref(db), "users/" + user.uid));
+      const role = snapshot.exists() ? snapshot.val().role : (user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase() ? "admin" : "user");
+      if (role === "admin") window.location.href = "admin.html";
+      else window.location.href = "index.html";
+    } catch (err) {
+      console.error(err);
+      window.location.href = "index.html";
+    }
+  }
+});
+
+// ---------------- Email/Password Login ----------------
+const form = document.getElementById("loginForm");
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = form.email.value.trim();
+  const password = form.password.value;
+
+  try {
+    const methods = await fetchSignInMethodsForEmail(auth, email);
+    if (!methods.includes("password") && methods.includes("google.com")) {
+      alert("This account was created using Google Sign-In. Please log in with Google.");
+      return;
+    }
+    if (!methods.includes("password")) {
+      alert("No password login is available for this account.");
+      return;
+    }
+
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    const snapshot = await get(child(ref(db), "users/" + user.uid));
+    const role = snapshot.exists() && snapshot.val().role ? snapshot.val().role : (email.toLowerCase() === ADMIN_EMAIL.toLowerCase() ? "admin" : "user");
+
+    if (!snapshot.exists()) await set(ref(db, "users/" + user.uid + "/role"), role);
+    if (role === "admin") window.location.href = "admin.html";
+    else window.location.href = "index.html";
+
+  } catch (error) {
+    alert("Login failed: " + error.message);
+  }
+});
+
+// ---------------- Google Sign-In ----------------
+const provider = new GoogleAuthProvider();
+document.getElementById('googleSignInBtn').addEventListener('click', async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    const snapshot = await get(child(ref(db), "users/" + user.uid));
+    let role;
+
+    if (!snapshot.exists()) {
+      role = user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase() ? "admin" : "user";
+      await set(ref(db, "users/" + user.uid), {
+        uid: user.uid,
+        name: user.displayName || "",
+        email: user.email || "",
+        phone: user.phoneNumber || "",
+        profileImage: user.photoURL || "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png",
+        signupTime: new Date().toISOString(),
+        role: role
+      });
+    } else {
+      role = snapshot.val().role || (user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase() ? "admin" : "user");
+    }
+
+    if (role === "admin") window.location.href = "admin.html";
+    else window.location.href = "index.html";
+
+  } catch (error) {
+    alert("Google login failed: " + error.message);
+  }
+});
+</script>
+
+</body>
+</html>

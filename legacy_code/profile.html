@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile - Savitri Jewellers</title>
+  <link rel="stylesheet" href="profile.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body:not(.auth-loaded) .profile-page { display: none; }
+  </style>
+</head>
+<body>
+
+  <div class="mobile-topbar">
+    <button class="profile-hamburger" id="profileHamburger" aria-label="Open menu">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="mobile-title">My Account</div>
+  </div>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="profile-page">
+    <aside class="sidebar" id="profileSidebar" aria-label="Profile Menu">
+      <div class="back-btn-bar">
+        <a href="index.html" class="profile-back-btn">
+          <i class="fas fa-arrow-left"></i> Back to Shopping
+        </a>
+      </div>
+
+      <h2>My Account</h2>
+      <ul>
+        <li class="active">Profile</li>
+        <li><a href="index.html?scroll=contact">Contact Us</a></li>
+        <a href="cart.html"><li>Saved Items</li></a>
+        <li id="logout-btn">Logout</li>
+      </ul>
+    </aside>
+
+    <main class="profile-content">
+      <div class="profile-header">
+        <div class="image-upload">
+          <img id="profile-pic" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Profile Picture" />
+        </div>
+        <div class="profile-form">
+          <input type="text" id="user-name" placeholder="Your Name" />
+          <p id="user-email">Loading email...</p>
+          <input type="text" id="user-phone" placeholder="Your Phone" />
+          <p id="member-since">Loading...</p>
+          <button id="save-profile">Save</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+    import { getDatabase, ref, get, update, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAcIX5XXvSQnCro67KK9_jF0AOGg2mDxVc",
+      authDomain: "savitri-jewellers-76184.firebaseapp.com",
+      projectId: "savitri-jewellers-76184",
+      storageBucket: "savitri-jewellers-76184.appspot.com",
+      messagingSenderId: "914460735352",
+      appId: "1:914460735352:web:d60778c5486d29db983a8d",
+      databaseURL: "https://savitri-jewellers-76184-default-rtdb.firebaseio.com"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    const nameEl = document.getElementById("user-name");
+    const emailEl = document.getElementById("user-email");
+    const phoneEl = document.getElementById("user-phone");
+    const dateEl = document.getElementById("member-since");
+    const picEl = document.getElementById("profile-pic");
+    const saveBtn = document.getElementById("save-profile");
+    const logoutBtn = document.getElementById("logout-btn");
+
+    const hamburger = document.getElementById("profileHamburger");
+    const sidebar = document.getElementById("profileSidebar");
+    const overlay = document.getElementById("sidebarOverlay");
+
+    function openSidebar() { document.body.classList.add("sidebar-open"); }
+    function closeSidebar() { document.body.classList.remove("sidebar-open"); }
+
+    hamburger?.addEventListener("click", openSidebar);
+    overlay?.addEventListener("click", closeSidebar);
+    window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSidebar(); });
+    window.addEventListener("resize", () => { if (window.innerWidth >= 769) closeSidebar(); });
+
+    let currentUID = null;
+    const defaultAvatar = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png";
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { window.location.href = "login.html"; return; }
+
+      currentUID = user.uid;
+      emailEl.textContent = user.email;
+
+      const userRef = ref(db, "users/" + currentUID);
+      const snapshot = await get(userRef);
+
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        nameEl.value = data.name || "";
+        phoneEl.value = data.phone || "";
+
+        const signupTime = data.signupTime || Date.now();
+        dateEl.textContent = "Member since: " + new Date(signupTime).toLocaleString();
+        if (!data.signupTime) await update(userRef, { signupTime });
+
+        let finalImage = data.profileImage || user.photoURL || defaultAvatar;
+        picEl.src = finalImage;
+        if (!data.profileImage || data.profileImage !== finalImage) await update(userRef, { profileImage: finalImage });
+
+      } else {
+        const now = Date.now();
+        const finalImage = user.photoURL || defaultAvatar;
+        await set(userRef, {
+          name: "",
+          email: user.email,
+          phone: "",
+          signupTime: now,
+          profileImage: finalImage
+        });
+        dateEl.textContent = "Member since: " + new Date(now).toLocaleString();
+        picEl.src = finalImage;
+      }
+
+      // Fallback if image fails
+      picEl.onerror = () => { picEl.src = defaultAvatar; };
+
+      document.body.classList.add("auth-loaded");
+    });
+
+    saveBtn.addEventListener("click", async () => {
+      if (!currentUID) return;
+      await update(ref(db, "users/" + currentUID), { name: nameEl.value, phone: phoneEl.value });
+      alert("Profile updated successfully!");
+    });
+
+    logoutBtn.addEventListener("click", () => {
+      signOut(auth).then(() => { window.location.href = "login.html"; });
+    });
+  </script>
+</body>
+</html>
