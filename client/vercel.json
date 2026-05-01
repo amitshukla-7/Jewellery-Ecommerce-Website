@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/uploads/:match*",
+      "destination": "https://jewellery-ecommerce-website.onrender.com/uploads/:match*"
+    }
+  ]
+}

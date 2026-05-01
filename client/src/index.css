@@ -970,8 +970,22 @@ h1, h2, h3, h4 {
    MOBILE RESPONSIVE
    ========================================= */
 @media (max-width: 768px) {
-  .navbar { padding: 0 12px; height: 62px; }
-  .search-icon-input { width: auto; flex: 1; max-width: 200px; }
+  .navbar { 
+    padding: 12px; 
+    height: auto; 
+    flex-wrap: wrap; 
+  }
+  .navbar-left { order: 1; }
+  .nav-auth { order: 2; }
+  .search-icon-input { 
+    order: 3;
+    width: 100%; 
+    flex: 0 0 100%; 
+    max-width: 100%; 
+    margin-top: 12px;
+    padding: 10px 16px;
+    background: #f5f5f5;
+  }
   .desktop-icons { display: none; }
   .nav-auth .nav-text { display: none; }
   .hamburger { display: block; }
