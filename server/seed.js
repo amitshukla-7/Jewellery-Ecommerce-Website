@@ -61,7 +61,7 @@ const importData = async () => {
     const productsData = [
       {
         name: 'Kundan Polki Wedding Set',
-        image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800',
+        image: '/products/1.jpg',
         description: 'Heritage Kundan Polki necklace set with handcrafted detailing and matching earrings.',
         category: 'wedding',
         price: 245000,
@@ -75,7 +75,7 @@ const importData = async () => {
       },
       {
         name: '22KT Gold Hoop Classic',
-        image: 'https://images.unsplash.com/photo-1630019058353-5240579b7631?auto=format&fit=crop&q=80&w=800',
+        image: '/products/2.jpg',
         description: 'Timeless 22KT high-polish gold hoops. A staple for every jewelry collection.',
         category: 'earrings',
         price: 32000,
@@ -89,7 +89,7 @@ const importData = async () => {
       },
       {
         name: 'Solitaire Diamond Ring',
-        image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=800',
+        image: '/products/3.jpg',
         description: 'Certified 1-carat brilliant cut diamond set in 18KT hallmarked white gold.',
         category: 'diamond',
         price: 185000,
@@ -103,7 +103,7 @@ const importData = async () => {
       },
       {
         name: 'Royal Heritage Bangle',
-        image: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&q=80&w=800',
+        image: '/products/4.jpg',
         description: 'Ornate gold bangle with traditional filigree work, inspired by Indian royalty.',
         category: 'gold-silver',
         price: 85000,
@@ -117,7 +117,7 @@ const importData = async () => {
       },
       {
         name: '925 Sterling Silver Bracelet',
-        image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=800',
+        image: '/products/5.jpg',
         description: 'Pure 925 sterling silver chain bracelet with a contemporary geometric clasp.',
         category: 'gold-silver',
         price: 6500,
@@ -131,7 +131,7 @@ const importData = async () => {
       },
       {
         name: 'Emerald Tear-Drop Earrings',
-        image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=800',
+        image: '/products/6.jpg',
         description: 'Deep green natural emeralds set in 18KT gold with a vintage drop design.',
         category: 'earrings',
         price: 55000,
@@ -145,7 +145,7 @@ const importData = async () => {
       },
       {
         name: 'Pave Diamond Wedding Band',
-        image: 'https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&q=80&w=800',
+        image: '/products/7.jpg',
         description: 'Glistening row of micro-pave diamonds in a sleek 18KT yellow gold band.',
         category: 'diamond',
         price: 95000,
@@ -159,7 +159,7 @@ const importData = async () => {
       },
       {
         name: 'Floral Gold Daily Studs',
-        image: 'https://images.unsplash.com/photo-1590548364669-906d4e2d3b24?auto=format&fit=crop&q=80&w=800',
+        image: '/products/8.jpg',
         description: 'Elegant flower-motif studs in 22KT gold. Perfect for office and daily wear.',
         category: 'earrings',
         price: 18000,
@@ -173,7 +173,7 @@ const importData = async () => {
       },
       {
         name: 'Antique Gold Choker',
-        image: 'https://images.unsplash.com/photo-1611085583191-a3b181a88401?auto=format&fit=crop&q=80&w=800',
+        image: '/products/9.jpg',
         description: 'Rich antique-finish choker with pearl accents. A masterpiece of traditional art.',
         category: 'wedding',
         price: 185000,
@@ -187,7 +187,7 @@ const importData = async () => {
       },
       {
         name: 'Rose Gold Pave Ring',
-        image: 'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&q=80&w=800',
+        image: '/products/10.jpg',
         description: 'Contemporary rose gold band featuring a brilliant pave-set diamond cluster.',
         category: 'diamond',
         price: 42000,
@@ -201,7 +201,7 @@ const importData = async () => {
       },
       {
         name: 'Traditional Jhumkas',
-        image: 'https://images.unsplash.com/photo-1596944210900-34d125132274?auto=format&fit=crop&q=80&w=800',
+        image: '/products/11.jpg',
         description: 'Peacock-inspired gold jhumkas with intricate bell design and ruby stones.',
         category: 'earrings',
         price: 68000,
@@ -215,7 +215,7 @@ const importData = async () => {
       },
       {
         name: 'Minimal Diamond Solitaire',
-        image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800',
+        image: '/products/12.jpg',
         description: 'Single sparkling diamond pendant in a minimalist 18KT gold setting.',
         category: 'diamond',
         price: 35000,
@@ -229,7 +229,7 @@ const importData = async () => {
       },
       {
         name: '925 Silver Anklet Duo',
-        image: 'https://images.unsplash.com/photo-1576053139778-7e32f2ae3cfd?q=80&w=1000&auto=format&fit=crop',
+        image: '/products/13.jpg',
         description: 'Delicate pair of silver anklets with tiny dangling charms and durable finish.',
         category: 'gold-silver',
         price: 4500,
@@ -243,7 +243,7 @@ const importData = async () => {
       },
       {
         name: 'Magnificent Bridal Set',
-        image: 'https://images.unsplash.com/photo-1630019058353-5240579b7631?auto=format&fit=crop&q=80&w=800',
+        image: '/products/14.jpg',
         description: 'A complete bridal set featuring a heavy necklace, earrings, and maang tikka.',
         category: 'wedding',
         price: 450000,
@@ -257,7 +257,7 @@ const importData = async () => {
       },
       {
         name: '24KT Gold Investment Coin',
-        image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=800',
+        image: '/products/15.jpg',
         description: 'Pure 99.9% 24KT gold coin. The perfect choice for investment and gifting.',
         category: 'gold-silver',
         price: 75000,
