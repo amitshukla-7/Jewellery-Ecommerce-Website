@@ -215,7 +215,7 @@ const importData = async () => {
       },
       {
         name: 'Minimal Diamond Solitaire',
-        image: 'https://images.unsplash.com/photo-1588444650733-d0c51dcaab06?q=80&w=1000&auto=format&fit=crop',
+        image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800',
         description: 'Single sparkling diamond pendant in a minimalist 18KT gold setting.',
         category: 'diamond',
         price: 35000,
@@ -243,7 +243,7 @@ const importData = async () => {
       },
       {
         name: 'Magnificent Bridal Set',
-        image: 'https://images.unsplash.com/photo-1599643477877-537ef5278533?q=80&w=1000&auto=format&fit=crop',
+        image: 'https://images.unsplash.com/photo-1630019058353-5240579b7631?auto=format&fit=crop&q=80&w=800',
         description: 'A complete bridal set featuring a heavy necklace, earrings, and maang tikka.',
         category: 'wedding',
         price: 450000,
@@ -257,7 +257,7 @@ const importData = async () => {
       },
       {
         name: '24KT Gold Investment Coin',
-        image: 'https://images.unsplash.com/photo-1610492421959-53396c34b071?q=80&w=1000&auto=format&fit=crop',
+        image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=800',
         description: 'Pure 99.9% 24KT gold coin. The perfect choice for investment and gifting.',
         category: 'gold-silver',
         price: 75000,
