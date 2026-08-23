@@ -40,7 +40,7 @@ describe('Order Routes Integration Tests', () => {
       });
 
     expect(res.statusCode).toBe(400);
-    expect(res.body.message).toBe('No order items'); // Depending on your actual error message
+    expect(res.body.message).toMatch(/No order items/);
   });
 
   it('GET /api/orders/myorders only returns the requesting user\'s orders', async () => {

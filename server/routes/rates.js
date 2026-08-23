@@ -1,6 +1,8 @@
 import express from 'express';
 import Rate from '../models/Rate.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
+import { validate } from '../middleware/validateMiddleware.js';
+import { ratesSchema } from '../validators/schemas.js';
 
 const router = express.Router();
 
@@ -35,7 +37,7 @@ router.get('/history', async (req, res) => {
 // @desc    Update today's rate
 // @route   POST /api/rates/update
 // @access  Private/Admin
-router.post('/update', protect, admin, async (req, res) => {
+router.post('/update', protect, admin, validate(ratesSchema), async (req, res) => {
   const { goldRate, silverRate } = req.body;
   
   // Normalize date to start of day
