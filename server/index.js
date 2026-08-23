@@ -17,7 +17,9 @@ import adminRoutes   from './routes/adminRoutes.js';
 import ratesRoutes   from './routes/rates.js';
 
 dotenv.config();
-connectDB();
+if (process.env.NODE_ENV !== 'test') {
+  connectDB();
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
@@ -71,5 +73,9 @@ app.use(notFound);
 app.use(errorHandler);
 
 // ─── Start ────────────────────────────────────────────────────
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} [${process.env.NODE_ENV}]`));
+if (process.env.NODE_ENV !== 'test') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} [${process.env.NODE_ENV}]`));
+}
+
+export default app;
